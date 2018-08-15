@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/usuarios.xhtml">
+	<ui:define name="subconteudo">
+	
+		<h:form>
+		
+			<p:panel header="Meu Usuário" styleClass="ui-g-12" style="margin-top: 10px;">
+			
+				<h:panelGrid columns="2" styleClass="painelgrid-usuario">
+				
+					<p:outputLabel value="Nome:" />
+					
+					<p:outputLabel value="#{usuarioBean.usuarioLogado.nome}" />
+					
+					<p:outputLabel value="Email:" />
+					
+					<p:outputLabel value="#{usuarioBean.usuarioLogado.email}" />
+					
+					<p:outputLabel value="Nivel Acesso:" />
+					
+					<p:outputLabel
+						value="#{usuarioBean.usuarioLogado.nivelAcesso.descricao}" />
+						
+				</h:panelGrid>
+				
+				<hr />
+				
+				<div align="right" class="div-button-right">
+				
+					<p:commandButton value="Alterar Senha" action="#{usuarioBean.navegarAlterarSenha}" icon="fa fa-fw fa-key"/>
+					
+				</div>
+				
+			</p:panel>
+			
+		</h:form>
+		
+	</ui:define>
+</ui:composition>
+</html>

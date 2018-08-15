@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/usuarios.xhtml">
+	<ui:define name="subconteudo">
+
+		<p:growl id="message" showDetail="true" life="5000" />
+
+		<h:form>
+
+			<p:panel header="Manter Usuário" styleClass="ui-g-12"
+				style="margin-top: 10px;">
+
+				<div align="right" class="div-search-right">
+
+					<p:outputLabel value="Nome:" />
+
+					<p:inputText title="Nome" placeholder="Nome" required="false"
+						value="#{manterUsuarioBean.pesquisa.nome}" />
+
+					<p:outputLabel value="Nível de Acesso:" />
+
+					<p:selectOneMenu id="nivelAcesso" title="Niveis de Acesso"
+						value="#{manterUsuarioBean.pesquisa.nivelAcesso}" required="false">
+						
+						<f:selectItem itemLabel="Selecione" oSelectionOption="true" />
+						
+						<f:selectItems value="#{manterUsuarioBean.niveisAcesso}"
+							var="nivel" itemLabel="#{nivel.descricao}" itemValue="#{nivel}" />
+							
+						<f:ajax event="blur" render="messageValidation" />
+						
+					</p:selectOneMenu>
+
+					<p:commandButton value="Limpar" icon="fa fa-fw fa-eraser"
+						type="submit">
+
+						<p:ajax update="@form" resetValues="true" />
+
+					</p:commandButton>
+
+					<p:commandButton value="Pesquisar"
+						action="#{manterUsuarioBean.pesquisar}" icon="fa fa-fw fa-search"
+						update="usuarios" />
+
+				</div>
+
+				<p:dataTable id="usuarios" var="u" paginator="true" rows="10"
+					styleClass="datatable" sortMode="single"
+					selection="#{manterUsuarioBean.selecionado}" rowKey="#{u.email}"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					value="#{manterUsuarioBean.usuarios}">
+
+					<p:column selectionMode="single" style="width:16px;" />
+
+					<p:column headerText="Nome do Usuário" sortBy="#{u.nome}">
+						<h:outputText value="#{u.nome}" />
+					</p:column>
+
+					<p:column headerText="Email do Usuário" sortBy="#{u.email}">
+						<h:outputText value="#{u.email}" />
+					</p:column>
+
+					<p:column headerText="Nível de Acesso"
+						sortBy="#{u.nivelAcesso.descricao}">
+						<h:outputText value="#{u.nivelAcesso.descricao}" />
+					</p:column>
+
+				</p:dataTable>
+
+				<div align="right" class="div-button-right">
+
+					<p:commandButton value="Deletar Usuário"
+						action="#{manterUsuarioBean.deletarUsuario}"
+						update="message usuarios" icon="fa fa-fw fa-user-times">
+
+						<p:confirm header="Confirmar" message="Deseja deletar o usuario?"
+							icon="ui-icon-alert" />
+
+					</p:commandButton>
+
+					<p:commandButton value="Resetar Senha"
+						action="#{manterUsuarioBean.resetarSenha}" update="message"
+						icon="fa fa-fw fa-key">
+
+						<p:confirm header="Confirmar" message="Deseja resetar a senha?"
+							icon="ui-icon-alert" />
+
+					</p:commandButton>
+
+				</div>
+
+			</p:panel>
+
+			<p:confirmDialog showEffect="fade" hideEffect="fade" global="true">
+
+				<div class="ui-g">
+
+					<div align="left" class="ui-g-6">
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no button-right"
+							icon="ui-icon-close" />
+					</div>
+
+					<div align="right" class="ui-g-6">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					</div>
+					
+				</div>
+
+			</p:confirmDialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

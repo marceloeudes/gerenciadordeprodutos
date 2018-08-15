@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/principal.xhtml">
+
+	<ui:define name="conteudo">
+
+		<div class="ui-g-12">
+
+			<div class="ui-g-12" style="background-color: white;">
+
+				<h2>Usuários</h2>
+
+				<h:form>
+
+					<div class="ui-g-12 button-function">
+
+						<div class="ui-g-1">
+
+							<p:commandButton value="Meu Usuário" icon="fa fa-fw fa-user"
+								action="usuariologado" ajax="false" immediate="true" />
+
+						</div>
+
+						<div class="ui-g-1">
+
+							<p:commandButton value="Novo Usuário"
+								icon="fa fa-fw fa-user-plus" action="novousuario" ajax="false"
+								immediate="true" rendered="#{usuarioBean.administrador}" />
+
+						</div>
+
+						<div class="ui-g-1">
+
+							<p:commandButton value="Manter Usuário" icon="fa fa-group fa-fw"
+								action="manterusuario" ajax="false" immediate="true"
+								rendered="#{usuarioBean.administrador}" />
+
+						</div>
+
+					</div>
+
+				</h:form>
+
+				<ui:insert name="subconteudo" />
+
+			</div>
+
+		</div>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

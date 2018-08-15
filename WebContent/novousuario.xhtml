@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/usuarios.xhtml">
+	<ui:define name="subconteudo">
+
+		<p:growl id="message" showDetail="true" life="5000" />
+
+		<h:form>
+
+			<p:panel header="Novo Usuário" styleClass="ui-g-12"
+				style="margin-top: 10px;">
+
+				<h:panelGrid columns="2" styleClass="painelgrid-cadastro">
+
+					<p:outputLabel value="Nome:" />
+
+					<p:inputText id="nome" value="#{novoUsuarioBean.usuario.nome}"
+						required="true" size="45" title="Nome" placeholder="Nome"
+						autocomplete="off" requiredMessage="Nome Obrigatório">
+
+						<p:ajax event="blur" render="messageValidation" />
+
+					</p:inputText>
+
+					<p:outputLabel value="Email:" />
+
+					<p:inputText id="email" value="#{novoUsuarioBean.usuario.email}"
+						required="true" size="45" title="Email" placeholder="Email"
+						autocomplete="off" validatorMessage="Email Inválido"
+						requiredMessage="Email Obrigatório">
+
+						<f:attribute name="type" value="email" />
+
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+						<p:ajax event="blur" render="messageValidation" />
+
+					</p:inputText>
+
+					<p:outputLabel value="Nivel de Acesso:" />
+
+					<p:selectOneMenu id="nivelAcesso" title="Niveis de Acesso"
+						value="#{novoUsuarioBean.usuario.nivelAcesso}" required="true"
+						requiredMessage="Nivel de Acesso Obrigatório">
+
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+
+						<f:selectItems value="#{novoUsuarioBean.niveisAcesso}" var="nivel"
+							itemLabel="#{nivel.descricao}" itemValue="#{nivel}" />
+
+						<p:ajax event="blur" render="messageValidation" />
+
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Senha:" />
+
+					<p:password id="senha" value="#{novoUsuarioBean.usuario.senha}"
+						required="true" feedback="true" title="Senha" placeholder="Senha"
+						autocomplete="off" weakLabel="Fraco" goodLabel="Boa"
+						strongLabel="Forte" requiredMessage="Senha Obrigatório">
+
+						<p:ajax event="blur" render="messageValidation" />
+
+					</p:password>
+
+				</h:panelGrid>
+
+				<hr />
+
+				<div align="right" class="div-button-right">
+
+					<p:commandButton value="Confirmar"
+						action="#{novoUsuarioBean.confirmar}" update="message @form"
+						icon="fa fa-fw fa-save" />
+
+				</div>
+
+			</p:panel>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

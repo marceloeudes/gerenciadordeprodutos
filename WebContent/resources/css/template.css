@@ -1,0 +1,212 @@
+/* painel tela de login */
+.panel-login {
+	box-sizing: border-box;
+	width: 400px;
+	height: 290px;
+}
+
+.panel-login label {
+	display: block;
+	text-align: left;
+	font-size: 1.1em;
+	width: 300px;
+}
+
+.panel-login input {
+	font-family: "Arial", sans-serif;
+	margin-bottom: 1em;
+	height: 30px;
+	width: 300px;
+}
+
+.panel-login button{
+	text-align: center;
+	margin: auto;
+	height: 40px;
+	width: 310px;
+}
+
+.panel-login button span{
+	margin: auto;
+}
+
+/* Cor de fundo */
+body {
+	background-color: #E8E8E8;
+}
+
+/* Titulo Principal */
+h1 {
+	font-family: "Arial", sans-serif;
+	text-align: center;
+	background-color: #1E90FF;
+	color: #FFF;
+	margin-top: 0px;
+	padding: 25px;
+	font-weight: bold;
+	border-radius: 05px;
+}
+
+/* Subtitulos */
+h2 {
+	font-family: "Arial", sans-serif;
+	text-align: left;
+	background: -webkit-linear-gradient(top, #f6f7f9 0%,#ebedf0 100%);
+	border: 1px solid #d9d9d9;	
+	color: black;
+	padding: 25px;
+	font-weight: bold;
+	font-size: 25px;
+	border-radius: 05px;
+}
+
+h3 {
+	font-family: "Arial", sans-serif;
+	text-align: center;
+	color: #363636;
+	font-weight: bold;
+	font-size: 18px;
+	margin: 10px 0 10px 0;
+}
+
+hr {
+	color: #E8E8E8;
+}
+
+/* formata todas as outputlabel */
+label {
+	font-family: "Arial", sans-serif;
+	color: #4F4F4F;
+	font-weight: bold;
+	font-size: 17px;
+}
+
+/* Classes comums*/
+
+/* Alinha botao a direita */
+.button-right {
+	float: right;
+}
+
+/* Classe usada para centralizar fieldset na pagina Login */
+.painel-central {
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	height: 40%;
+	width: 100%;	
+}
+
+/* Classes usada na div para alinhar botoes de selecao da datatable a direita */
+.div-button-right {
+	margin-right: 0px;
+	margin-top: 15px;
+}
+
+.div-button-right button {
+	margin: 0 1em 0 0;
+}
+
+.div-button-right button:nth-last-child(1) {
+	margin-right: 0;
+}
+
+/* Classes usada na div para alinhar elementos de pesquisa a direita */
+.div-search-right {
+	margin-right: 0px;
+	margin-top: 15px;
+}
+
+.div-search-right button {
+	margin: 0 1em 0 0;
+}
+
+.div-search-right button:nth-last-child(1) {
+	margin-right: 0;
+}
+
+.div-search-right button:nth-last-child(2) {
+	margin-left: 50px;
+}
+
+.div-search-right label {
+	margin: 0 1em 0 0;
+}
+
+.div-search-right input {
+	margin: 0 25px 0 0;
+}
+
+/* ??? */
+.grid-fieldset {
+	width: 500px;
+}
+
+/* formata painel grid com dados do usuario logado */
+.painelgrid-usuario {
+	display: inline-block;
+}
+
+.painelgrid-usuario td {
+	padding: 10px;
+}
+
+/* formata painel grid com input de dados */
+.painelgrid-cadastro {
+	
+}
+
+.painelgrid-cadastro td {
+	padding: 05px;
+}
+
+/* Classe usada para modificar usuario logado em menubar */
+.usuario-logado {
+	padding-right: 15px;
+}
+
+/* Classe usada para botoes da funcionalidade */
+.button-function {
+	border: 1px solid #D5D5D5;
+	margin-top: 10px;
+}
+
+/* Classes PRIMEFACES */
+
+/* formata componente p:growl */
+.ui-growl {
+	margin: 100px 0 10px 0;
+}
+
+/* formata todas as fontes */
+.ui-widget {
+	font-family: "Arial", sans-serif;
+	font-size: 17px;
+}
+
+/* formata datatable */
+.ui-menuitem-text {
+	font-weight: bold;
+	font-size: 17px;
+}
+
+/* formata datatable */
+.ui-datatable {
+	margin-top: 15px;
+}
+
+.ui-datatable td {
+	text-align: center;
+}
+
+.ui-panel {
+	margin: auto;
+	box-sizing: border-box;
+}
+
+.ui-g-12 {
+	border-radius: 05px;
+}

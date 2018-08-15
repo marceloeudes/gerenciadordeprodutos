@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/index.xhtml">
+	<ui:define name="conteudo">
+		<div class="div-fieldset">
+			<p:fieldset legend="Manter Produtos">
+				<p:dataTable id="produtos" var="p" paginator="true" rows="10"
+					sortMode="single" rowKey="#{p.cdProduto}"
+					selection="#{manterProdutoBean.selecionado}"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					value="#{manterProdutoBean.produtos}">
+					<p:column selectionMode="single"
+						style="width:16px;text-align:center" />
+					<p:column headerText="Descricao" width="050%"
+						sortBy="#{p.nmProduto}">
+						<h:outputText value="#{p.nmProduto}" />
+					</p:column>
+					<p:column headerText="Categoria" style="text-align: center;"
+						sortBy="#{p.categoriaProduto.desCategoria}">
+						<h:outputText value="#{p.categoriaProduto.desCategoria}" />
+					</p:column>
+					<p:column headerText="Quantidade" style="text-align: center;"
+						sortBy="#{p.qtdEstoque}">
+						<h:outputText value="#{p.qtdEstoque}" />
+					</p:column>
+					<p:column headerText="Valor" style="text-align: center;"
+						sortBy="#{p.vlrProduto}">
+						<h:outputText value="#{p.vlrProduto}">
+							<f:convertNumber type="currency" pattern="R$ #,##0.00"
+								currencyCode="BRL" />
+						</h:outputText>
+					</p:column>
+				</p:dataTable>
+				<div align="right" class="botoes-lista">
+					<p:commandButton value="Alterar Produto"
+						action="#{manterProdutoBean.alterar}" />
+					<p:commandButton value="Novo Produto" action="novoproduto?faces-redirect=true" />
+				</div>
+			</p:fieldset>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

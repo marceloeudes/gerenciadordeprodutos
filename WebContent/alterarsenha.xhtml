@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/usuarios.xhtml">
+	<ui:define name="subconteudo">
+
+		<p:growl id="message" showDetail="true" life="5000" />
+
+		<h:form>
+
+			<p:panel header="Meu Usuário - Alterar Senha" styleClass="ui-g-12"
+				style="margin-top: 10px;">
+
+				<p:messages id="messageValidation" closable="true" />
+
+				<h:panelGrid columns="2" styleClass="painelgrid-cadastro">
+
+					<p:outputLabel value="Senha:" />
+
+					<p:password id="senha" value="#{alterarUsuarioBean.usuario.senha}"
+						required="true" title="Senha" placeholder="Senha"
+						autocomplete="off" requiredMessage="Senha Obrigatório">
+
+						<f:ajax event="blur" render="messageValidation" />
+
+					</p:password>
+
+					<p:outputLabel value="Nova Senha:" />
+
+					<p:password id="novaSenha" value="#{alterarUsuarioBean.novaSenha}"
+						required="true" feedback="true" title="Nova Senha"
+						placeholder="Nova Senha" autocomplete="off" weakLabel="Fraco"
+						goodLabel="Boa" strongLabel="Forte"
+						requiredMessage="Nova Senha Obrigatório">
+
+						<f:ajax event="blur" render="messageValidation" />
+
+					</p:password>
+
+				</h:panelGrid>
+
+				<hr />
+
+				<div align="left" class="ui-g-6">
+
+					<p:commandButton value="voltar" action="usuariologado" ajax="false"
+						immediate="true" icon="fa fa-fw fa-arrow-left" />
+
+				</div>
+
+				<div align="right" class="ui-g-6">
+
+					<p:commandButton value="Confirmar"
+						action="#{alterarUsuarioBean.alterarSenha}" update="message"
+						icon="fa fa-fw fa-save">
+
+						<f:ajax render="@form" />
+
+					</p:commandButton>
+
+				</div>
+
+			</p:panel>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

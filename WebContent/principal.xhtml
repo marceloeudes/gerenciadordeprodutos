@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<ui:composition template="/index.xhtml">
+	<ui:define name="menu">
+
+		<h:form>
+
+			<p:menubar style="margin-top: 10px;">
+
+				<p:menuitem value="Produtos"
+					action="manterproduto?faces-redirect=true" />
+
+				<p:menuitem value="Clientes" icon="fa fa-fw fa-user" />
+
+				<p:menuitem value="Compras" icon="fa fa-fw fa-shopping-cart" />
+
+				<p:menuitem value="Usuários"
+					action="usuariologado?faces-redirect=true" icon="fa fa-fw fa-user" />
+
+				<f:facet name="options">
+
+					<div style="margin-top: 5px;">
+
+						<p:outputLabel value="#{sessaoBean.usuario.nome}"
+							styleClass="usuario-logado" />
+
+						<p:commandButton value="Logout" action="#{sessaoBean.deslogar}"
+							icon="fa fa-fw fa-sign-out" />
+
+					</div>
+
+				</f:facet>
+
+			</p:menubar>
+
+		</h:form>
+
+	</ui:define>
+	
+	<ui:define name="conteudo"></ui:define>
+	
+</ui:composition>
+</html>

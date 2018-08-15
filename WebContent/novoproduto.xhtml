@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/index.xhtml">
+	<ui:define name="conteudo">
+		<div class="div-fieldset">
+			<p:fieldset legend="Novo Produto" styleClass="grid-fieldset">
+				<h:panelGrid columns="2" styleClass="grid-campos">
+					<p:outputLabel value="Descrição*" />
+					<p:inputText value="#{novoProdutoBean.produto.nmProduto}"
+						required="true" size="45" maxlength="45" title="Descricao Produto"
+						placeholder="Descricao Produto" />
+					<p:outputLabel value="Categoria*" />
+					<p:selectOneMenu id="selecionarCategoria" title="Categoria"
+						converter="javax.faces.Integer"
+						value="#{novoProdutoBean.produto.categoriaProduto.cdCategoria}">
+						<f:selectItems value="#{novoProdutoBean.listaCategoria}"
+							var="c" itemLabel="#{c.desCategoria}"
+							itemValue="#{c.cdCategoria}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="Preço*" />
+					<p:inputText converter="javax.faces.BigDecimal" title="Preço"
+						placeholder="Preço"
+						value="#{novoProdutoBean.produto.vlrProduto}" />
+					<p:outputLabel value="Estoque*" />
+					<p:inputText converter="javax.faces.Integer" title="Estoque"
+						placeholder="Estoque"
+						value="#{novoProdutoBean.produto.qtdEstoque}" />
+				</h:panelGrid>
+				<p:commandButton value="Voltar" action="manterproduto"
+					immediate="true" styleClass="div-fieldset-button" />
+				<p:commandButton value="Confirmar"
+					styleClass="div-fieldset-button-right div-fieldset-button"
+					action="#{novoProdutoBean.confirmar}" type="submit" />
+			</p:fieldset>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
