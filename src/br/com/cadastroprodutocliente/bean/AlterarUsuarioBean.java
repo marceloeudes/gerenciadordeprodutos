@@ -17,6 +17,7 @@ public class AlterarUsuarioBean {
 
 	private Usuario usuario;
 	private String novaSenha;
+	private String confirmarSenha;
 	private IUsuarioDao usuarioDao;
 	
 	@PostConstruct
@@ -37,6 +38,8 @@ public class AlterarUsuarioBean {
 		} else {
 			FacesMessageUtil.addMenssage(Mensagens.SENHA_INFORMADA_INCORRETA);
 		}
+		
+		FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("message");
 			
 	}
 	
@@ -54,6 +57,14 @@ public class AlterarUsuarioBean {
 
 	public void setNovaSenha(String novaSenha) {
 		this.novaSenha = novaSenha;
+	}
+
+	public String getConfirmarSenha() {
+		return confirmarSenha;
+	}
+
+	public void setConfirmarSenha(String confirmarSenha) {
+		this.confirmarSenha = confirmarSenha;
 	}
 
 	public IUsuarioDao getUsuarioDao() {

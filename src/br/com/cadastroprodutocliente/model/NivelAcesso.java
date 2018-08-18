@@ -6,7 +6,7 @@ import java.util.List;
 public enum NivelAcesso {
 
 	ADMINISTRADOR(1, "Administrador"),
-	FUNCIONARIO(2, "Funcionário");
+	FUNCIONARIO(2, "FuncionÃ¡rio");
 	
 	private int id;
 	private String descricao;
@@ -34,7 +34,7 @@ public enum NivelAcesso {
                 return nivelAcesso;
             }
         }
-        throw new IllegalArgumentException("Nivel de acesso inválido: " + id);
+        throw new IllegalArgumentException("Nivel de acesso invï¿½lido: " + id);
     }
 	
 }

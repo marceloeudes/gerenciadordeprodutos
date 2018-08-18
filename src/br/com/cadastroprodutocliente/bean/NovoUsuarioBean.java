@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.cadastroprodutocliente.dao.IUsuarioDao;
 import br.com.cadastroprodutocliente.dao.UsuarioDao;
@@ -42,6 +43,8 @@ public class NovoUsuarioBean {
 		} else {
 			FacesMessageUtil.addMenssage(Mensagens.ERRO_ACESSO_BASE_DADOS);
 		}
+		
+		FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("message");
 			
 	}
 	

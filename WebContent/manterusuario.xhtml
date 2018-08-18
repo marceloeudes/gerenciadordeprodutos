@@ -8,7 +8,9 @@
 <ui:composition template="/usuarios.xhtml">
 	<ui:define name="subconteudo">
 
-		<p:growl id="message" showDetail="true" life="5000" />
+		<p:growl id="message" showDetail="true" life="5000">
+			<p:autoUpdate disabled="false"></p:autoUpdate>
+		</p:growl>
 
 		<h:form>
 
@@ -26,22 +28,18 @@
 
 					<p:selectOneMenu id="nivelAcesso" title="Niveis de Acesso"
 						value="#{manterUsuarioBean.pesquisa.nivelAcesso}" required="false">
-						
+
 						<f:selectItem itemLabel="Selecione" oSelectionOption="true" />
-						
+
 						<f:selectItems value="#{manterUsuarioBean.niveisAcesso}"
 							var="nivel" itemLabel="#{nivel.descricao}" itemValue="#{nivel}" />
-							
+
 						<f:ajax event="blur" render="messageValidation" />
-						
+
 					</p:selectOneMenu>
 
 					<p:commandButton value="Limpar" icon="fa fa-fw fa-eraser"
-						type="submit">
-
-						<p:ajax update="@form" resetValues="true" />
-
-					</p:commandButton>
+						action="#{manterUsuarioBean.limpar}" update="@form" />
 
 					<p:commandButton value="Pesquisar"
 						action="#{manterUsuarioBean.pesquisar}" icon="fa fa-fw fa-search"
@@ -53,7 +51,8 @@
 					styleClass="datatable" sortMode="single"
 					selection="#{manterUsuarioBean.selecionado}" rowKey="#{u.email}"
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					value="#{manterUsuarioBean.usuarios}">
+					value="#{manterUsuarioBean.usuarios}"
+					emptyMessage="Não existem usuários a serem listados">
 
 					<p:column selectionMode="single" style="width:16px;" />
 
@@ -75,8 +74,8 @@
 				<div align="right" class="div-button-right">
 
 					<p:commandButton value="Deletar Usuário"
-						action="#{manterUsuarioBean.deletarUsuario}"
-						update="message usuarios" icon="fa fa-fw fa-user-times">
+						action="#{manterUsuarioBean.deletarUsuario}" update="@form"
+						icon="fa fa-fw fa-user-times">
 
 						<p:confirm header="Confirmar" message="Deseja deletar o usuario?"
 							icon="ui-icon-alert" />
@@ -84,8 +83,7 @@
 					</p:commandButton>
 
 					<p:commandButton value="Resetar Senha"
-						action="#{manterUsuarioBean.resetarSenha}" update="message"
-						icon="fa fa-fw fa-key">
+						action="#{manterUsuarioBean.resetarSenha}" icon="fa fa-fw fa-key">
 
 						<p:confirm header="Confirmar" message="Deseja resetar a senha?"
 							icon="ui-icon-alert" />
@@ -96,7 +94,8 @@
 
 			</p:panel>
 
-			<p:confirmDialog showEffect="fade" hideEffect="fade" global="true">
+			<p:confirmDialog id="dialog" showEffect="fade" hideEffect="fade"
+				global="true">
 
 				<div class="ui-g">
 
@@ -110,7 +109,7 @@
 						<p:commandButton value="Sim" type="button"
 							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 					</div>
-					
+
 				</div>
 
 			</p:confirmDialog>

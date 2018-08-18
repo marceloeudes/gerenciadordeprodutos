@@ -23,14 +23,14 @@
 						<div class="ui-g-1">
 
 							<p:commandButton value="Meu Usuário" icon="fa fa-fw fa-user"
-								action="usuariologado" ajax="false" immediate="true" />
+								action="#{usuarioBean.navegarMeuUsuario}" ajax="false" immediate="true" />
 
 						</div>
 
 						<div class="ui-g-1">
 
 							<p:commandButton value="Novo Usuário"
-								icon="fa fa-fw fa-user-plus" action="novousuario" ajax="false"
+								icon="fa fa-fw fa-user-plus" action="#{usuarioBean.navegarNovoUsuario}" ajax="false"
 								immediate="true" rendered="#{usuarioBean.administrador}" />
 
 						</div>
@@ -38,7 +38,7 @@
 						<div class="ui-g-1">
 
 							<p:commandButton value="Manter Usuário" icon="fa fa-group fa-fw"
-								action="manterusuario" ajax="false" immediate="true"
+								action="#{usuarioBean.navegarManterUsuario}" ajax="false" immediate="true"
 								rendered="#{usuarioBean.administrador}" />
 
 						</div>

@@ -19,7 +19,7 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CD_USUARIO")
-	private String codigo;
+	private int codigo;
 	
 	@Column(name = "NM_USUARIO")
 	private String nome;
@@ -34,10 +34,10 @@ public class Usuario implements Serializable {
 	@Column(name = "IE_NIVEL_ACESSO_USUARIO")
 	private NivelAcesso nivelAcesso;
 	
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 	public String getNome() {

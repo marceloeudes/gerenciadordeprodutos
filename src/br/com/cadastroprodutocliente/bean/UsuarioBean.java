@@ -36,6 +36,18 @@ public class UsuarioBean {
 		return Paginas.ALTERAR_SENHA;
 	}
 	
+	public String navegarMeuUsuario() {
+		return Paginas.MEU_USUARIO;
+	}
+	
+	public String navegarNovoUsuario() {
+		return Paginas.NOVO_USUARIO;
+	}
+	
+	public String navegarManterUsuario() {
+		return Paginas.MANTER_USUARIO;
+	}
+	
 	public Usuario getUsuarioLogado() {
 		return usuarioLogado;
 	}

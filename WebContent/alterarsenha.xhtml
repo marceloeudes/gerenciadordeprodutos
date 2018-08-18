@@ -8,16 +8,20 @@
 <ui:composition template="/usuarios.xhtml">
 	<ui:define name="subconteudo">
 
-		<p:growl id="message" showDetail="true" life="5000" />
+		<p:growl id="message" showDetail="true" life="5000">
+			<p:autoUpdate disabled="true"></p:autoUpdate>
+		</p:growl>
+
+		<p:panel class="ui-g-12" style="margin-top: 10px;">
+			<p:outputLabel value="Meu Usuário"/>	
+		</p:panel>
 
 		<h:form>
 
-			<p:panel header="Meu Usuário - Alterar Senha" styleClass="ui-g-12"
+			<p:panel header="Alterar Senha" styleClass="ui-g-12"
 				style="margin-top: 10px;">
 
-				<p:messages id="messageValidation" closable="true" />
-
-				<h:panelGrid columns="2" styleClass="painelgrid-cadastro">
+				<h:panelGrid columns="3" styleClass="painelgrid-cadastro">
 
 					<p:outputLabel value="Senha:" />
 
@@ -25,9 +29,9 @@
 						required="true" title="Senha" placeholder="Senha"
 						autocomplete="off" requiredMessage="Senha Obrigatório">
 
-						<f:ajax event="blur" render="messageValidation" />
-
 					</p:password>
+
+					<p:message for="senha" />
 
 					<p:outputLabel value="Nova Senha:" />
 
@@ -37,9 +41,21 @@
 						goodLabel="Boa" strongLabel="Forte"
 						requiredMessage="Nova Senha Obrigatório">
 
-						<f:ajax event="blur" render="messageValidation" />
+					</p:password>
+
+					<p:message for="novaSenha" />
+					
+					<p:outputLabel value="Confirmar Senha:" />
+
+					<p:password id="confirmarSenha" value="#{alterarUsuarioBean.confirmarSenha}"
+						required="true" feedback="true" title="Confirmar Senha"
+						placeholder="Confirmar Senha" autocomplete="off" weakLabel="Fraco"
+						goodLabel="Boa" strongLabel="Forte"
+						requiredMessage="Confirmar Senha Obrigatório">
 
 					</p:password>
+
+					<p:message for="confirmarSenha" />
 
 				</h:panelGrid>
 
@@ -55,12 +71,8 @@
 				<div align="right" class="ui-g-6">
 
 					<p:commandButton value="Confirmar"
-						action="#{alterarUsuarioBean.alterarSenha}" update="message"
-						icon="fa fa-fw fa-save">
-
-						<f:ajax render="@form" />
-
-					</p:commandButton>
+						action="#{alterarUsuarioBean.alterarSenha}" update="@form"
+						icon="fa fa-fw fa-save" />
 
 				</div>
 

@@ -18,6 +18,7 @@ public class UsuarioDao implements IUsuarioDao {
 	@Override
 	public boolean incluirUsuario(Usuario usuario) {
 		boolean sucesso = true;
+		usuario.setSenha("1234");
 		try {
 			entityManager = JPAUtil.getEntityManager();
 			entityManager.getTransaction().begin();
