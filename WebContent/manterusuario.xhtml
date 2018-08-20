@@ -54,6 +54,10 @@
 					value="#{manterUsuarioBean.usuarios}"
 					emptyMessage="Não existem usuários a serem listados">
 
+					<f:facet name="header">
+						<p:outputLabel value="Lista de Usuários"/>
+					</f:facet>
+
 					<p:column selectionMode="single" style="width:16px;" />
 
 					<p:column headerText="Nome do Usuário" sortBy="#{u.nome}">

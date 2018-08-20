@@ -5,44 +5,127 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<ui:composition template="/index.xhtml">
-	<ui:define name="conteudo">
-		<div class="div-fieldset">
-			<p:fieldset legend="Manter Produtos">
+<ui:composition template="/produtos.xhtml">
+	<ui:define name="subconteudo">
+
+		<p:growl id="message" showDetail="true" life="5000">
+			<p:autoUpdate disabled="false"></p:autoUpdate>
+		</p:growl>
+
+		<h:form>
+
+			<p:panel header="Manter Produtos" styleClass="ui-g-12"
+				style="margin-top: 10px;">
+
+				<div align="right" class="div-search-right">
+
+					<p:outputLabel value="Descrição:" />
+
+					<p:inputText title="Descrição" placeholder="Descrição" size="50"
+						required="false" value="#{manterProdutoBean.filtro.descricao}" />
+
+					<p:outputLabel value="Categoria:" />
+
+					<p:inputText id="categoria"
+						value="#{manterProdutoBean.filtro.categoria.nome}"
+						readonly="true" title="Categoria" placeholder="Categoria" style="margin-right: 10px"/>
+
+					<p:commandButton icon="fa fa-fw fa-search"
+						action="#{manterProdutoBean.consultarCategoria}" ajax="false"/>
+
+					<p:commandButton value="Limpar" icon="fa fa-fw fa-eraser"
+						action="#{manterProdutoBean.limpar}" update="@form" />
+
+					<p:commandButton value="Pesquisar"
+						action="#{manterProdutoBean.pesquisar}" icon="fa fa-fw fa-search"
+						update="produtos" />
+
+				</div>
+
 				<p:dataTable id="produtos" var="p" paginator="true" rows="10"
-					sortMode="single" rowKey="#{p.cdProduto}"
+					sortMode="single" rowKey="#{p.codigo}"
 					selection="#{manterProdutoBean.selecionado}"
 					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					value="#{manterProdutoBean.produtos}">
+					value="#{manterProdutoBean.produtos}"
+					emptyMessage="Não existem produtos a serem listados.">
+
+					<f:facet name="header">
+						<p:outputLabel value="Lista de Produtos" />
+					</f:facet>
+
 					<p:column selectionMode="single"
 						style="width:16px;text-align:center" />
+
 					<p:column headerText="Descricao" width="050%"
-						sortBy="#{p.nmProduto}">
-						<h:outputText value="#{p.nmProduto}" />
+						sortBy="#{p.descricao}">
+						<h:outputText value="#{p.descricao}" />
 					</p:column>
+
 					<p:column headerText="Categoria" style="text-align: center;"
-						sortBy="#{p.categoriaProduto.desCategoria}">
-						<h:outputText value="#{p.categoriaProduto.desCategoria}" />
+						sortBy="#{p.categoria.nome}">
+						<h:outputText value="#{p.categoria.nome}" />
 					</p:column>
+
 					<p:column headerText="Quantidade" style="text-align: center;"
-						sortBy="#{p.qtdEstoque}">
-						<h:outputText value="#{p.qtdEstoque}" />
+						sortBy="#{p.estoque}">
+						<h:outputText value="#{p.estoque}" />
 					</p:column>
+
 					<p:column headerText="Valor" style="text-align: center;"
-						sortBy="#{p.vlrProduto}">
-						<h:outputText value="#{p.vlrProduto}">
+						sortBy="#{p.valor}">
+						<h:outputText value="#{p.valor}">
+
 							<f:convertNumber type="currency" pattern="R$ #,##0.00"
 								currencyCode="BRL" />
+
 						</h:outputText>
 					</p:column>
+
 				</p:dataTable>
-				<div align="right" class="botoes-lista">
+
+				<div align="right" class="div-button-right">
+
 					<p:commandButton value="Alterar Produto"
-						action="#{manterProdutoBean.alterar}" />
-					<p:commandButton value="Novo Produto" action="novoproduto?faces-redirect=true" />
+						action="#{manterProdutoBean.alterar}"
+						icon="fa fa-fw fa-pencil-square-o" />
+
+					<p:commandButton value="Deletar Produto"
+						action="#{manterProdutoBean.deletar}" icon="fa fa-fw fa-close"
+						update="@form">
+
+						<p:confirm header="Confirmar" message="Deseja deletar o produto?"
+							icon="ui-icon-alert" />
+
+					</p:commandButton>
+
+					<p:commandButton value="Dados de Log" icon="fa fa-fw fa-calendar" />
+
 				</div>
-			</p:fieldset>
-		</div>
+
+			</p:panel>
+
+			<p:confirmDialog id="dialog" showEffect="fade" hideEffect="fade"
+				global="true">
+
+				<div class="ui-g">
+
+					<div align="left" class="ui-g-6">
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no button-right"
+							icon="ui-icon-close" />
+					</div>
+
+					<div align="right" class="ui-g-6">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					</div>
+
+				</div>
+
+			</p:confirmDialog>
+
+		</h:form>
+
 	</ui:define>
 </ui:composition>
 </html>

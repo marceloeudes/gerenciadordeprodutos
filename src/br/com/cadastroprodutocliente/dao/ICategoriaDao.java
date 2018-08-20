@@ -6,11 +6,11 @@ import br.com.cadastroprodutocliente.model.Categoria;
 
 public interface ICategoriaDao {
 
-	public void incluirCategoria(Categoria categoria);
+	public boolean incluirCategoria(Categoria categoria);
 	
-	public void alterarCategoria(Categoria categoria);
+	public boolean alterarCategoria(Categoria categoria);
 	
-	public void deletarCategoria(Categoria categoria);
+	public boolean deletarCategoria(Categoria categoria);
 	
 	public List<Categoria> listarCategoria();
 	

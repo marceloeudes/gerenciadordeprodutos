@@ -38,7 +38,7 @@ public class NovoUsuarioBean {
 		}
 		
 		if (usuarioDao.incluirUsuario(usuario)){
-			FacesMessageUtil.addMenssage(Mensagens.INCLUIDO_COM_SUCESSO);
+			FacesMessageUtil.addMenssage(Mensagens.CADASTRADO_COM_SUCESSO);
 			usuario = new Usuario();
 		} else {
 			FacesMessageUtil.addMenssage(Mensagens.ERRO_ACESSO_BASE_DADOS);

@@ -36,7 +36,7 @@ public class ManterUsuarioBean {
 	public void deletarUsuario() {
 		if (selecionadoValido()) {
 			if (usuarioDao.deletarUsuario(selecionado)) {
-				FacesMessageUtil.addMenssage(Mensagens.USUARIO_DELETADO_COM_SUCESSO);
+				FacesMessageUtil.addMenssage(Mensagens.DELETADO_COM_SUCESSO);
 				usuarios = usuarioDao.listarUsuario();
 			} else {
 				FacesMessageUtil.addMenssage(Mensagens.ERRO_ACESSO_BASE_DADOS);

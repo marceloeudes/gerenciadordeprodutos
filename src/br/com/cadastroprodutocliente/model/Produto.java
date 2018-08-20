@@ -38,10 +38,18 @@ public class Produto {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataHoraInclusao;
 	
+	@ManyToOne
+	@JoinColumn(name = "CD_USUARIO_INCL_PRODUTO")
+	private Usuario usuarioInclusao;
+	
 	@Column(name = "HR_MANUT_PRODUTO")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataHoraManutencao;
 
+	@ManyToOne
+	@JoinColumn(name = "CD_USUARIO_MANUT_PRODUTO")
+	private Usuario usuarioManutencao;
+		
 	public int getCodigo() {
 		return codigo;
 	}
@@ -90,12 +98,28 @@ public class Produto {
 		this.dataHoraInclusao = dataHoraInclusao;
 	}
 
+	public Usuario getUsuarioInclusao() {
+		return usuarioInclusao;
+	}
+
+	public void setUsuarioInclusao(Usuario usuarioInclusao) {
+		this.usuarioInclusao = usuarioInclusao;
+	}
+	
 	public Calendar getDataHoraManutencao() {
 		return dataHoraManutencao;
 	}
 
 	public void setDataHoraManutencao(Calendar dataHoraManutencao) {
 		this.dataHoraManutencao = dataHoraManutencao;
+	}
+
+	public Usuario getUsuarioManutencao() {
+		return usuarioManutencao;
+	}
+
+	public void setUsuarioManutencao(Usuario usuarioManutencao) {
+		this.usuarioManutencao = usuarioManutencao;
 	}
 
 }

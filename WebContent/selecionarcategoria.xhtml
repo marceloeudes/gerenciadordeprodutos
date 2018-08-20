@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/produtos.xhtml">
+	<ui:define name="subconteudo">
+
+		<p:growl id="message" showDetail="true" life="5000">
+			<p:autoUpdate disabled="false"></p:autoUpdate>
+		</p:growl>
+		
+		<p:panel class="ui-g-12" style="margin-top: 10px;">
+			<p:outputLabel value="#{selecionarCategoriaBean.paginaAnterior}"/>	
+		</p:panel>
+
+		<h:form>
+
+			<p:panel header="Selecionar Categoria" styleClass="ui-g-12"
+				style="margin-top: 10px;">
+
+				<p:dataTable id="categorias" var="categ" paginator="true" rows="10"
+					sortMode="single" rowKey="#{categ.codigo}"
+					selection="#{selecionarCategoriaBean.selecionado}"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					value="#{selecionarCategoriaBean.categorias}"
+					emptyMessage="Não existem categorias a serem listadas.">
+
+					<f:facet name="header">
+						<p:outputLabel value="Lista de Categorias" />
+					</f:facet>
+
+					<p:column selectionMode="single"
+						style="width:16px;text-align:center" />
+
+					<p:column headerText="Nome" sortBy="#{categ.nome}">
+						<h:outputText value="#{categ.nome}" />
+					</p:column>
+
+				</p:dataTable>
+
+				<div align="left" class="ui-g-6">
+
+					<p:commandButton value="voltar"
+						action="#{selecionarCategoriaBean.voltar}" ajax="false"
+						immediate="true" icon="fa fa-fw fa-arrow-left" />
+
+				</div>
+
+				<div align="right" class="ui-g-6">
+
+					<p:commandButton value="Confirmar"
+						action="#{selecionarCategoriaBean.confirmarSelecao}" icon="fa fa-fw fa-check" />
+
+				</div>
+
+			</p:panel>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

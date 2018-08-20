@@ -58,8 +58,7 @@ public class UsuarioDao implements IUsuarioDao {
 		try {
 			entityManager = JPAUtil.getEntityManager();
 			entityManager.getTransaction().begin();
-			Usuario usuarioManaged = entityManager.find(Usuario.class, usuario.getCodigo());
-			usuarioManaged.setSenha(usuario.getSenha());
+			entityManager.find(Usuario.class, usuario.getCodigo());
 			entityManager.merge(usuario);
 			entityManager.getTransaction().commit();
 		} catch (Throwable e) {

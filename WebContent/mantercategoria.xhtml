@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/produtos.xhtml">
+	<ui:define name="subconteudo">
+
+		<p:growl id="message" showDetail="true" life="5000">
+			<p:autoUpdate disabled="false"></p:autoUpdate>
+		</p:growl>
+
+		<h:form>
+
+			<p:panel header="Manter Categoria" styleClass="ui-g-12"
+				style="margin-top: 10px;">
+
+				<p:dataTable id="categorias" var="categ" paginator="true" rows="10"
+					sortMode="single" rowKey="#{categ.codigo}"
+					selection="#{manterCategoriaBean.selecionado}"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					value="#{manterCategoriaBean.categorias}"
+					emptyMessage="Não existem categorias a serem listadas.">
+
+					<f:facet name="header">
+						<p:outputLabel value="Lista de Categorias"/>
+					</f:facet>
+
+					<p:column selectionMode="single"
+						style="width:16px;text-align:center" />
+
+					<p:column headerText="Nome" sortBy="#{categ.nome}">
+						<h:outputText value="#{categ.nome}" />
+					</p:column>
+
+					<p:column headerText="Data de Inclusão"
+						sortBy="#{categ.dataHoraInclusao.time}">
+						<h:outputText value="#{categ.dataHoraInclusao.time}">
+							<f:convertDateTime type="both" dateStyle="short" timeZone="GMT-3" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Usuário de Inclusão"
+						sortBy="#{categ.usuarioInclusao.nome}">
+						<h:outputText value="#{categ.usuarioInclusao.nome}" />
+					</p:column>
+
+					<p:column headerText="Data de Alteração"
+						sortBy="#{categ.dataHoraManutencao.time}">
+						<h:outputText value="#{categ.dataHoraManutencao.time}">
+							<f:convertDateTime type="both" dateStyle="short" timeZone="GMT-3" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Usuário de Alteração"
+						sortBy="#{categ.usuarioManutencao.nome}">
+						<h:outputText value="#{categ.usuarioManutencao.nome}" />
+					</p:column>
+
+				</p:dataTable>
+
+				<div align="right" class="div-button-right">
+
+					<p:commandButton value="Alterar Categoria"
+						action="#{manterCategoriaBean.navegarAlterarCategoria}"
+						icon="fa fa-fw fa-pencil-square-o" />
+
+				</div>
+
+			</p:panel>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

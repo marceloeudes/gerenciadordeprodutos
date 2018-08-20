@@ -14,7 +14,7 @@
 
 			<div class="ui-g-12" style="background-color: white;">
 
-				<h2>Usuários</h2>
+				<h2>Produtos</h2>
 
 				<h:form>
 
@@ -22,25 +22,33 @@
 
 						<div class="ui-g-1">
 
-							<p:commandButton value="Meu Usuário"
-								action="#{usuarioBean.navegarMeuUsuario}" ajax="false"
-								immediate="true" icon="fa fa-fw fa-user"/>
+							<p:commandButton value="Manter Produto"
+								action="#{produtoBean.navegarManterProduto}" ajax="false"
+								immediate="true" icon="fa fa-fw fa-list"/>
 
 						</div>
 
 						<div class="ui-g-1">
 
-							<p:commandButton value="Manter Usuário"
-								action="#{usuarioBean.navegarManterUsuario}" ajax="false"
-								immediate="true" rendered="#{usuarioBean.administrador}" icon="fa fa-fw fa-list"/>
+							<p:commandButton value="Novo Produto"
+								action="#{produtoBean.navegarNovoProduto}" ajax="false"
+								immediate="true" icon="fa fa-fw fa-plus"/>
+
+						</div>
+
+						<div class="ui-g-1">
+
+							<p:commandButton value="Manter Categoria"
+								action="#{produtoBean.navegarManterCategoria}" ajax="false"
+								immediate="true" icon="fa fa-fw fa-list"/>
 
 						</div>
 						
 						<div class="ui-g-1">
 
-							<p:commandButton value="Novo Usuário"
-								action="#{usuarioBean.navegarNovoUsuario}" ajax="false"
-								immediate="true" rendered="#{usuarioBean.administrador}" icon="fa fa-fw fa-plus"/>
+							<p:commandButton value="Nova Categoria"
+								action="#{produtoBean.navegarNovaCategoria}" ajax="false"
+								immediate="true" icon="fa fa-fw fa-plus"/>
 
 						</div>
 

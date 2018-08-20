@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,9 +27,17 @@ public class Categoria {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataHoraInclusao;
 	
+	@ManyToOne
+	@JoinColumn(name = "CD_USUARIO_INCL_CATEGORIA_PRODUTO")
+	private Usuario usuarioInclusao;
+	
 	@Column(name = "HR_MANUT_CATEGORIA_PRODUTO")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataHoraManutencao;
+	
+	@ManyToOne
+	@JoinColumn(name = "CD_USUARIO_MANUT_CATEGORIA_PRODUTO")
+	private Usuario usuarioManutencao;
 	
 	public int getCodigo() {
 		return codigo;
@@ -47,12 +57,23 @@ public class Categoria {
 	public void setDataHoraInclusao(Calendar dataHoraInclusao) {
 		this.dataHoraInclusao = dataHoraInclusao;
 	}
+	public Usuario getusuarioInclusao() {
+		return usuarioInclusao;
+	}
+	public void setusuarioInclusao(Usuario usuarioInclusao) {
+		this.usuarioInclusao = usuarioInclusao;
+	}
 	public Calendar getDataHoraManutencao() {
 		return dataHoraManutencao;
 	}
 	public void setDataHoraManutencao(Calendar dataHoraManutencao) {
 		this.dataHoraManutencao = dataHoraManutencao;
 	}
-	
+	public Usuario getUsuarioManutencao() {
+		return usuarioManutencao;
+	}
+	public void setUsuarioManutencao(Usuario usuarioManutencao) {
+		this.usuarioManutencao = usuarioManutencao;
+	}
 	
 }

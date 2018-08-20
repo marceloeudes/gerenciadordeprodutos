@@ -14,7 +14,8 @@ public class ProdutoDao implements IProdutoDao {
 	private EntityManager entityManager;
 	private Query query;
 
-	public void incluirProduto(Produto produto) {
+	public boolean incluirProduto(Produto produto) {
+		boolean sucesso = true;
 		try {
 			entityManager = JPAUtil.getEntityManager();
 			entityManager.getTransaction().begin();
@@ -22,35 +23,45 @@ public class ProdutoDao implements IProdutoDao {
 			entityManager.getTransaction().commit();
 		} catch (Throwable e) {
 			e.printStackTrace();
+			sucesso = false;
 		} finally {
 			entityManager.close();
 		}
+		return sucesso;
 	}
 
-	public void alterarProduto(Produto produto) {
+	public boolean alterarProduto(Produto produto) {
+		boolean sucesso = true;
 		try {
 			entityManager = JPAUtil.getEntityManager();
 			entityManager.getTransaction().begin();
+			entityManager.find(Produto.class, produto.getCodigo());
 			entityManager.merge(produto);
 			entityManager.getTransaction().commit();
 		} catch (Throwable e) {
 			e.printStackTrace();
+			sucesso = false;
 		} finally {
 			entityManager.close();
 		}
+		return sucesso;
 	}
 
-	public void deletarProduto(Produto produto) {
+	public boolean deletarProduto(Produto produto) {
+		boolean sucesso = true;
 		try {
 			entityManager = JPAUtil.getEntityManager();
 			entityManager.getTransaction().begin();
-			entityManager.remove(produto);
+			Produto produtoManaged = entityManager.find(Produto.class, produto.getCodigo());
+			entityManager.remove(produtoManaged);
 			entityManager.getTransaction().commit();
 		} catch (Throwable e) {
 			e.printStackTrace();
+			sucesso = false;
 		} finally {
 			entityManager.close();
 		}
+		return sucesso;
 	}
 
 	public List<Produto> listaDinamica(Produto filtro) {
@@ -76,7 +87,7 @@ public class ProdutoDao implements IProdutoDao {
 	@SuppressWarnings("unchecked")
 	public List<Produto> listarProduto() {
 		List<Produto> produtos = null;
-		String jpql = "select p from produtos p join fetch p.categoria" + " order by cdProduto";
+		String jpql = "select p from TB_PRODUTO p join fetch p.categoria" + " order by p.codigo";
 		try {
 			entityManager = JPAUtil.getEntityManager();
 			entityManager.getTransaction().begin();
@@ -93,8 +104,8 @@ public class ProdutoDao implements IProdutoDao {
 	@SuppressWarnings("unchecked")
 	public List<Produto> listarProduto(int categoria) {
 		List<Produto> produtos = null;
-		String jpql = "select p from produtos p join fetch p.categoria " + "where p.categoria.cdCategoria = :pCategoria"
-				+ " order by cdProduto";
+		String jpql = "select p from TB_PRODUTO p join fetch p.categoria " + "where p.categoria.codigo = :pCategoria"
+				+ " order by p.codigo";
 		try {
 			entityManager = JPAUtil.getEntityManager();
 			entityManager.getTransaction().begin();
@@ -112,8 +123,8 @@ public class ProdutoDao implements IProdutoDao {
 	@SuppressWarnings("unchecked")
 	public List<Produto> listarProduto(String descricao) {
 		List<Produto> produtos = null;
-		String jpql = "select p from produtos p join fetch p.categoria " + "where p.nmProduto like :pNome"
-				+ " order by cdProduto";
+		String jpql = "select p from TB_PRODUTO p join fetch p.categoria " + "where p.nome like :pNome"
+				+ " order by p.codigo";
 		try {
 			entityManager = JPAUtil.getEntityManager();
 			entityManager.getTransaction().begin();
@@ -131,9 +142,9 @@ public class ProdutoDao implements IProdutoDao {
 	@SuppressWarnings("unchecked")
 	public List<Produto> listarProduto(int categoria, String descricao) {
 		List<Produto> produtos = null;
-		String jpql = "select p from produtos p join fetch p.categoria "
-				+ "where p.categoria.cdCategoria = :pCategoria " + "and p.nmProduto like :pNome"
-				+ " order by cdProduto";
+		String jpql = "select p from TB_PRODUTO p join fetch p.categoria "
+				+ "where p.categoria.codigo = :pCategoria " + "and p.nome like :pNome"
+				+ " order by p.codigo";
 		try {
 			entityManager = JPAUtil.getEntityManager();
 			entityManager.getTransaction().begin();

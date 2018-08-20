@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/produtos.xhtml">
+	<ui:define name="subconteudo">
+
+		<p:growl id="message" showDetail="true" life="5000">
+			<p:autoUpdate disabled="true"></p:autoUpdate>
+		</p:growl>
+
+		<h:form>
+
+			<p:panel header="Nova Categoria" styleClass="ui-g-12"
+				style="margin-top: 10px;">
+
+				<h:panelGrid columns="3" styleClass="painelgrid-cadastro">
+
+					<p:outputLabel value="Nome Categoria:" />
+
+					<p:inputText id="nome"
+						value="#{novaCategoriaBean.categoria.nome}" required="true"
+						size="25" title="Nome Categoria" placeholder="Nome Categoria"
+						requiredMessage="Nome Categoria Obrigatório" />
+
+					<p:message for="nome" />
+
+				</h:panelGrid>
+
+				<hr />
+
+				<div align="right" class="div-button-right">
+
+					<p:commandButton value="Confirmar"
+						action="#{novaCategoriaBean.confirmar}" update="@form"
+						icon="fa fa-fw fa-save" />
+
+				</div>
+
+			</p:panel>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

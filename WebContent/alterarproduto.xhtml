@@ -5,39 +5,91 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<ui:composition template="/index.xhtml">
-	<ui:define name="conteudo">
-		<div class="div-fieldset">
-			<p:fieldset legend="Alterar Produto" styleClass="grid-fieldset">
-				<h:panelGrid columns="2" styleClass="grid-campos">
-					<p:outputLabel value="Descrição*" />
-					<p:inputText value="#{alterarProdutoBean.produto.nmProduto}"
-						required="true" size="45" maxlength="45" title="Descricao Produto"
-						placeholder="Descricao Produto" />
-					<p:outputLabel value="Categoria*" />
-					<p:selectOneMenu id="selecionarCategoria" title="Categoria"
-						converter="javax.faces.Integer"
-						value="#{alterarProdutoBean.produto.categoriaProduto.cdCategoria}">
-						<f:selectItems value="#{alterarProdutoBean.listaCategoria}"
-							var="c" itemLabel="#{c.desCategoria}"
-							itemValue="#{c.cdCategoria}" />
-					</p:selectOneMenu>
-					<p:outputLabel value="Preço*" />
-					<p:inputText converter="javax.faces.BigDecimal" title="Preço"
-						placeholder="Preço"
-						value="#{alterarProdutoBean.produto.vlrProduto}" />
-					<p:outputLabel value="Estoque*" />
-					<p:inputText converter="javax.faces.Integer" title="Estoque"
-						placeholder="Estoque"
-						value="#{alterarProdutoBean.produto.qtdEstoque}" />
+<ui:composition template="/produtos.xhtml">
+	<ui:define name="subconteudo">
+
+		<p:growl id="message" showDetail="true" life="5000">
+			<p:autoUpdate disabled="true"></p:autoUpdate>
+		</p:growl>
+
+		<p:panel class="ui-g-12" style="margin-top: 10px;">
+			<p:outputLabel value="Manter Produto" />
+		</p:panel>
+
+		<h:form>
+
+			<p:panel header="Alterar Produto" styleClass="ui-g-12"
+				style="margin-top: 10px;">
+
+				<h:panelGrid columns="2" styleClass="painelgrid-cadastro">
+
+					<p:outputLabel value="Descrição:" />
+
+					<h:panelGrid>
+
+						<p:inputText id="descricao"
+							value="#{alterarProdutoBean.produto.descricao}" size="70"
+							title="Descrição do Produto" placeholder="Descrição do Produto" />
+
+					</h:panelGrid>
+
+					<p:outputLabel value="Categoria:" />
+
+					<h:panelGrid columns="2">
+
+						<p:inputText id="categoria"
+							value="#{alterarProdutoBean.produto.categoria.nome}"
+							readonly="true" title="Categoria" placeholder="Categoria" />
+
+						<p:commandButton icon="fa fa-fw fa-search"
+							action="#{alterarProdutoBean.consultarCategoria}" ajax="false" />
+
+					</h:panelGrid>
+
+					<p:outputLabel value="Preço:" />
+
+					<h:panelGrid>
+
+						<p:inputNumber id="preco" converter="javax.faces.BigDecimal"
+							placeholder="Preço" title="Preço" emptyValue="zero" tabindex="1"
+							value="#{alterarProdutoBean.produto.valor}" symbol="R$ "
+							decimalSeparator="," thousandSeparator="." />
+
+					</h:panelGrid>
+
+					<p:outputLabel value="Quantidade:" />
+
+					<h:panelGrid>
+
+						<p:inputText id="estoque" converter="javax.faces.Integer"
+							title="Estoque" placeholder="Estoque"
+							value="#{alterarProdutoBean.produto.estoque}" />
+
+					</h:panelGrid>
+
 				</h:panelGrid>
-				<p:commandButton value="Voltar" action="manterproduto"
-					immediate="true" styleClass="div-fieldset-button" />
-				<p:commandButton value="Confirmar"
-					styleClass="div-fieldset-button-right div-fieldset-button"
-					action="#{alterarProdutoBean.confirmar}" type="submit" />
-			</p:fieldset>
-		</div>
+
+				<hr />
+
+				<div align="left" class="ui-g-6">
+
+					<p:commandButton value="voltar"
+						action="#{alterarProdutoBean.voltar}" ajax="false"
+						immediate="true" icon="fa fa-fw fa-arrow-left" />
+				</div>
+
+				<div align="right" class="ui-g-6">
+
+					<p:commandButton value="Confirmar"
+						action="#{alterarProdutoBean.confirmar}" update="@form"
+						icon="fa fa-fw fa-save" />
+
+				</div>
+
+			</p:panel>
+
+		</h:form>
+
 	</ui:define>
 </ui:composition>
 </html>

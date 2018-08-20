@@ -6,11 +6,11 @@ import br.com.cadastroprodutocliente.model.Produto;
 
 public interface IProdutoDao {
 
-	public void incluirProduto(Produto produto);
+	public boolean incluirProduto(Produto produto);
 
-	public void alterarProduto(Produto produto);
+	public boolean alterarProduto(Produto produto);
 
-	public void deletarProduto(Produto produto);
+	public boolean deletarProduto(Produto produto);
 	
 	public List<Produto> listaDinamica(Produto filtro);
 
