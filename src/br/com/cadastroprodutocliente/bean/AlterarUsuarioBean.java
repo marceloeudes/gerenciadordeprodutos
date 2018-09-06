@@ -10,6 +10,7 @@ import br.com.cadastroprodutocliente.dao.UsuarioDao;
 import br.com.cadastroprodutocliente.model.Usuario;
 import br.com.cadastroprodutocliente.util.FacesMessageUtil;
 import br.com.cadastroprodutocliente.util.Mensagens;
+import br.com.cadastroprodutocliente.util.SessaoUtil;
 
 @ManagedBean
 @ViewScoped
@@ -22,7 +23,7 @@ public class AlterarUsuarioBean {
 	
 	@PostConstruct
 	public void inicializar() {
-		usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		usuario = (Usuario) SessaoUtil.consultarAreaFlash("usuario");
 		usuarioDao = new UsuarioDao();
 	}
 

@@ -10,10 +10,10 @@ import javax.faces.context.FacesContext;
 import br.com.cadastroprodutocliente.dao.CategoriaDao;
 import br.com.cadastroprodutocliente.dao.ICategoriaDao;
 import br.com.cadastroprodutocliente.model.Categoria;
-import br.com.cadastroprodutocliente.model.Usuario;
 import br.com.cadastroprodutocliente.util.FacesMessageUtil;
 import br.com.cadastroprodutocliente.util.Mensagens;
 import br.com.cadastroprodutocliente.util.Paginas;
+import br.com.cadastroprodutocliente.util.SessaoUtil;
 
 @ManagedBean
 @ViewScoped
@@ -25,11 +25,11 @@ public class AlterarCategoriaBean {
 	@PostConstruct
 	public void inicializar() {
 		categoriaDao = new CategoriaDao();
-		categoria = (Categoria) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("selecionado");
+		categoria = (Categoria) SessaoUtil.consultarAreaFlash("selecionado");
 	}
 	
 	public String confirmar() {
-		categoria.setUsuarioManutencao(obterNomeUsuarioSessao());
+		categoria.setUsuarioManutencao(SessaoUtil.obterUsuarioSessao());
 		categoria.setDataHoraManutencao(Calendar.getInstance());
 		if (categoriaDao.alterarCategoria(categoria)) {
 			FacesMessageUtil.addMenssage(Mensagens.ALTERADO_COM_SUCESSO);
@@ -39,12 +39,6 @@ public class AlterarCategoriaBean {
 		categoria = new Categoria();
 		FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("message");
 		return Paginas.MANTER_CATEGORIA;
-	}
-	
-	public Usuario obterNomeUsuarioSessao() {
-		Usuario usuarioSessao = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.get("usuario");
-		return usuarioSessao;
 	}
 	
 	public String voltar() {

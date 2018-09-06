@@ -5,12 +5,12 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import br.com.cadastroprodutocliente.dao.CategoriaDao;
 import br.com.cadastroprodutocliente.dao.ICategoriaDao;
 import br.com.cadastroprodutocliente.model.Categoria;
 import br.com.cadastroprodutocliente.model.Produto;
+import br.com.cadastroprodutocliente.util.SessaoUtil;
 import br.com.cadastroprodutocliente.util.FacesMessageUtil;
 import br.com.cadastroprodutocliente.util.Mensagens;
 import br.com.cadastroprodutocliente.util.SiteUtil;
@@ -22,31 +22,31 @@ public class SelecionarCategoriaBean {
 	private List<Categoria> categorias;
 	private ICategoriaDao categoriaDao;
 	private Categoria selecionado;
-	private Produto novoProduto;
+	private Produto produto;
 	private String paginaAnterior;
-	private Object temporario;
+	private String caminhoDePao;
 
 	@PostConstruct
 	public void inicializar() {
 		categoriaDao = new CategoriaDao();
 		categorias = categoriaDao.listarCategoria();
 		selecionado = new Categoria();
-		novoProduto = (Produto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("produto");
-		paginaAnterior = (String) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("paginaanterior");
-		temporario = FacesContext.getCurrentInstance().getExternalContext().getFlash().get("temporario");
+		produto = (Produto) SessaoUtil.consultarAreaFlash("produto");
+		paginaAnterior = (String) SessaoUtil.consultarAreaFlash("paginaanterior");
+		caminhoDePao = SessaoUtil.obterCaminhoDePao();
 	}
 	
 	public String confirmarSelecao() {
 		if (selecionadoValido()) {
-			novoProduto.setCategoria(selecionado);
-			gravarMemoriaFLash();
+			produto.setCategoria(selecionado);
+			SessaoUtil.gravarAreaFlash("produto", produto);
 			return paginaAnterior;
 		}
 		return null;
 	}
 	
 	public String voltar() {
-		gravarMemoriaFLash();
+		SessaoUtil.gravarAreaFlash("produto", produto);
 		return paginaAnterior;
 	}
 	
@@ -58,11 +58,6 @@ public class SelecionarCategoriaBean {
 		return true;
 	}
 	
-	public void gravarMemoriaFLash() {
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("produto", novoProduto);
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("temporario", temporario);
-	}
-
 	public List<Categoria> getCategorias() {
 		return categorias;
 	}
@@ -87,12 +82,12 @@ public class SelecionarCategoriaBean {
 		this.selecionado = selecionado;
 	}
 
-	public Produto getNovoProduto() {
-		return novoProduto;
+	public Produto getProduto() {
+		return produto;
 	}
 
-	public void setNovoProduto(Produto novoProduto) {
-		this.novoProduto = novoProduto;
+	public void setProduto(Produto novoProduto) {
+		this.produto = novoProduto;
 	}
 
 	public String getPaginaAnterior() {
@@ -101,6 +96,14 @@ public class SelecionarCategoriaBean {
 
 	public void setPaginaAnterior(String paginaAnterior) {
 		this.paginaAnterior = paginaAnterior;
+	}
+
+	public String getCaminhoDePao() {
+		return caminhoDePao;
+	}
+
+	public void setCaminhoDePao(String caminhoDePao) {
+		this.caminhoDePao = caminhoDePao;
 	}
 	
 }

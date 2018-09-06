@@ -27,11 +27,12 @@
 					<p:outputLabel value="Categoria:" />
 
 					<p:inputText id="categoria"
-						value="#{manterProdutoBean.filtro.categoria.nome}"
-						readonly="true" title="Categoria" placeholder="Categoria" style="margin-right: 10px"/>
+						value="#{manterProdutoBean.filtro.categoria.nome}" readonly="true"
+						title="Categoria" placeholder="Categoria"
+						style="margin-right: 10px" />
 
 					<p:commandButton icon="fa fa-fw fa-search"
-						action="#{manterProdutoBean.consultarCategoria}" ajax="false"/>
+						action="#{manterProdutoBean.consultarCategoria}" ajax="false" />
 
 					<p:commandButton value="Limpar" icon="fa fa-fw fa-eraser"
 						action="#{manterProdutoBean.limpar}" update="@form" />
@@ -82,14 +83,16 @@
 					</p:column>
 
 				</p:dataTable>
+				
+				<hr />
 
 				<div align="right" class="div-button-right">
 
-					<p:commandButton value="Alterar Produto"
-						action="#{manterProdutoBean.alterar}"
+					<p:commandButton value="Alterar"
+						action="#{manterProdutoBean.navegarAlterar}"
 						icon="fa fa-fw fa-pencil-square-o" />
 
-					<p:commandButton value="Deletar Produto"
+					<p:commandButton value="Deletar"
 						action="#{manterProdutoBean.deletar}" icon="fa fa-fw fa-close"
 						update="@form">
 
@@ -98,7 +101,8 @@
 
 					</p:commandButton>
 
-					<p:commandButton value="Dados de Log" icon="fa fa-fw fa-calendar" />
+					<p:commandButton value="Detalhar" icon="fa fa-fw fa-calendar"
+						action="#{manterProdutoBean.navegarDetalhar}" />
 
 				</div>
 

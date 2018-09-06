@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
 
 import br.com.cadastroprodutocliente.dao.IUsuarioDao;
 import br.com.cadastroprodutocliente.dao.UsuarioDao;
@@ -13,6 +12,7 @@ import br.com.cadastroprodutocliente.model.Usuario;
 import br.com.cadastroprodutocliente.util.FacesMessageUtil;
 import br.com.cadastroprodutocliente.util.Mensagens;
 import br.com.cadastroprodutocliente.util.Paginas;
+import br.com.cadastroprodutocliente.util.SessaoUtil;
 import br.com.cadastroprodutocliente.util.SiteUtil;
 
 @ManagedBean
@@ -33,9 +33,7 @@ public class LoginBean implements Serializable {
 	public String logar() {
 		Usuario usuarioValido = usuarioDao.validarUsuario(usuario);
 		if (!SiteUtil.emptyOrNull(usuarioValido)) {
-			usuarioValido.setSenha(null);
-			FacesContext context = FacesContext.getCurrentInstance();
-			context.getExternalContext().getSessionMap().put("usuario", usuarioValido);
+			SessaoUtil.gravarUsuarioSessao(usuarioValido);
 			return Paginas.PAGINA_INICIAL;
 		} else {
 			FacesMessageUtil.addMenssage(Mensagens.EMAIL_SENHA_INCORRETOS);

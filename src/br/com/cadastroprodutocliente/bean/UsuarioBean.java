@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import br.com.cadastroprodutocliente.model.NivelAcesso;
 import br.com.cadastroprodutocliente.model.Usuario;
 import br.com.cadastroprodutocliente.util.Paginas;
+import br.com.cadastroprodutocliente.util.SessaoUtil;
 
 @ManagedBean
 @ViewScoped
@@ -33,18 +34,22 @@ public class UsuarioBean {
 	}
 	
 	public String navegarAlterarSenha() {
+		SessaoUtil.limparAreaSessionMap();
 		return Paginas.ALTERAR_SENHA;
 	}
 	
 	public String navegarMeuUsuario() {
+		SessaoUtil.limparAreaSessionMap();
 		return Paginas.MEU_USUARIO;
 	}
 	
 	public String navegarNovoUsuario() {
+		SessaoUtil.limparAreaSessionMap();
 		return Paginas.NOVO_USUARIO;
 	}
 	
 	public String navegarManterUsuario() {
+		SessaoUtil.limparAreaSessionMap();
 		return Paginas.MANTER_USUARIO;
 	}
 	

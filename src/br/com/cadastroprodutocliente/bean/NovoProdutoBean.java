@@ -11,10 +11,10 @@ import javax.faces.context.FacesContext;
 import br.com.cadastroprodutocliente.dao.ProdutoDao;
 import br.com.cadastroprodutocliente.model.Categoria;
 import br.com.cadastroprodutocliente.model.Produto;
-import br.com.cadastroprodutocliente.model.Usuario;
 import br.com.cadastroprodutocliente.util.FacesMessageUtil;
 import br.com.cadastroprodutocliente.util.Mensagens;
 import br.com.cadastroprodutocliente.util.Paginas;
+import br.com.cadastroprodutocliente.util.SessaoUtil;
 import br.com.cadastroprodutocliente.util.SiteUtil;
 
 @ManagedBean
@@ -26,30 +26,30 @@ public class NovoProdutoBean {
 
 	@PostConstruct
 	public void inicializar() {
-		produto = consultarMemoriaFlash();
+		inicializarProduto();
 		produtoDao = new ProdutoDao();
 	}
 
-	public Produto consultarMemoriaFlash() {
-		Produto novoProduto = (Produto) FacesContext.getCurrentInstance().getExternalContext().getFlash()
-				.get("produto");
-		if (SiteUtil.emptyOrNull(novoProduto)) {
-			novoProduto = new Produto();
-			novoProduto.setCategoria(new Categoria());
-			novoProduto.setValor(BigDecimal.ZERO);
+	public void inicializarProduto() {
+		produto = (Produto) SessaoUtil.consultarAreaFlash("produto");
+		if (SiteUtil.emptyOrNull(produto)) {
+			produto = new Produto();
+			produto.setCategoria(new Categoria());
+			produto.setValor(BigDecimal.ZERO);
 		}
-		return novoProduto;
 	}
 
 	public String consultarCategoria() {
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("paginaanterior", "novoproduto");
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("produto", produto);
+		SessaoUtil
+		.gravarAreaSessionMap(new SessaoUtil("Novo Produto", null, null));
+		SessaoUtil.gravarAreaFlash("paginaanterior", "novoproduto");
+		SessaoUtil.gravarAreaFlash("produto", produto);
 		return Paginas.SELECIONAR_CATEGORIA;
 	}
 
 	public void confirmar() {
 		if (produtoValido()) {
-			produto.setUsuarioInclusao(obterUsuarioSessao());
+			produto.setUsuarioInclusao(SessaoUtil.obterUsuarioSessao());
 			produto.setDataHoraInclusao(Calendar.getInstance());
 			if (produtoDao.incluirProduto(produto)) {
 				FacesMessageUtil.addMenssage(Mensagens.CADASTRADO_COM_SUCESSO);
@@ -82,12 +82,6 @@ public class NovoProdutoBean {
 			valido = false;
 		}
 		return valido;
-	}
-
-	public Usuario obterUsuarioSessao() {
-		Usuario usuarioSessao = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.get("usuario");
-		return usuarioSessao;
 	}
 
 	public Produto getProduto() {

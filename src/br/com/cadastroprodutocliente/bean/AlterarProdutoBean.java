@@ -12,10 +12,10 @@ import br.com.cadastroprodutocliente.dao.IProdutoDao;
 import br.com.cadastroprodutocliente.dao.ProdutoDao;
 import br.com.cadastroprodutocliente.model.Categoria;
 import br.com.cadastroprodutocliente.model.Produto;
-import br.com.cadastroprodutocliente.model.Usuario;
 import br.com.cadastroprodutocliente.util.FacesMessageUtil;
 import br.com.cadastroprodutocliente.util.Mensagens;
 import br.com.cadastroprodutocliente.util.Paginas;
+import br.com.cadastroprodutocliente.util.SessaoUtil;
 import br.com.cadastroprodutocliente.util.SiteUtil;
 
 @ManagedBean
@@ -29,20 +29,20 @@ public class AlterarProdutoBean {
 	public void inicializar() {
 		produto = consultarMemoriaFlash();
 		produtoDao = new ProdutoDao();
+		atualizarCaminhodePao();
 	}
 	
 	public Produto consultarMemoriaFlash() {
-		Produto produtoAlteracao = (Produto) FacesContext.getCurrentInstance().getExternalContext().getFlash()
-				.get("produto");
+		Produto produtoAlteracao = (Produto) SessaoUtil.consultarAreaFlash("produto");
 		if (SiteUtil.emptyOrNull(produtoAlteracao)) {
-			produtoAlteracao = (Produto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("selecionado");
+			produtoAlteracao = (Produto) SessaoUtil.consultarAreaFlash("selecionado");
 		}
 		return produtoAlteracao;
 	}
 	
 	public String confirmar() {
 		if (produtoValido()) {
-			produto.setUsuarioManutencao(obterUsuarioSessao());
+			produto.setUsuarioManutencao(SessaoUtil.obterUsuarioSessao());
 			produto.setDataHoraManutencao(Calendar.getInstance());
 			if (produtoDao.alterarProduto(produto)) {
 				FacesMessageUtil.addMenssage(Mensagens.ALTERADO_COM_SUCESSO);
@@ -62,8 +62,8 @@ public class AlterarProdutoBean {
 	}
 	
 	public String consultarCategoria() {
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("paginaanterior", "alterarproduto");
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("produto", produto);
+		SessaoUtil.gravarAreaFlash("paginaanterior", "alterarproduto");
+		SessaoUtil.gravarAreaFlash("produto", produto);
 		return Paginas.SELECIONAR_CATEGORIA;
 	}
 	
@@ -87,11 +87,17 @@ public class AlterarProdutoBean {
 		}
 		return valido;
 	}
-
-	public Usuario obterUsuarioSessao() {
-		Usuario usuarioSessao = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-				.get("usuario");
-		return usuarioSessao;
+	
+	public void atualizarCaminhodePao() {
+		SessaoUtil sessaoUtil = SessaoUtil.consultarAreaSessionMap();
+		if (SiteUtil.emptyOrNull(sessaoUtil)) {
+			SessaoUtil.gravarAreaSessionMap(new SessaoUtil("Alterar Produto"));
+		} else {
+			if (!sessaoUtil.getPaginasComunicadas().contains("Alterar Produto")) {
+				sessaoUtil.getPaginasComunicadas().add("Alterar Produto");
+				SessaoUtil.gravarAreaSessionMap(sessaoUtil);
+			}
+		}
 	}
 
 	public Produto getProduto() {

@@ -123,13 +123,13 @@ public class ProdutoDao implements IProdutoDao {
 	@SuppressWarnings("unchecked")
 	public List<Produto> listarProduto(String descricao) {
 		List<Produto> produtos = null;
-		String jpql = "select p from TB_PRODUTO p join fetch p.categoria " + "where p.nome like :pNome"
+		String jpql = "select p from TB_PRODUTO p join fetch p.categoria " + "where p.descricao like :pDescricao"
 				+ " order by p.codigo";
 		try {
 			entityManager = JPAUtil.getEntityManager();
 			entityManager.getTransaction().begin();
 			query = entityManager.createQuery(jpql);
-			query.setParameter("pNome", "%" + descricao + "%");
+			query.setParameter("pDescricao", "%" + descricao + "%");
 			produtos = query.getResultList();
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -143,14 +143,14 @@ public class ProdutoDao implements IProdutoDao {
 	public List<Produto> listarProduto(int categoria, String descricao) {
 		List<Produto> produtos = null;
 		String jpql = "select p from TB_PRODUTO p join fetch p.categoria "
-				+ "where p.categoria.codigo = :pCategoria " + "and p.nome like :pNome"
+				+ "where p.categoria.codigo = :pCategoria " + "and p.descricao like :pDescricao"
 				+ " order by p.codigo";
 		try {
 			entityManager = JPAUtil.getEntityManager();
 			entityManager.getTransaction().begin();
 			query = entityManager.createQuery(jpql);
 			query.setParameter("pCategoria", categoria);
-			query.setParameter("pNome", "%" + descricao + "%");
+			query.setParameter("pDescricao", "%" + descricao + "%");
 			produtos = query.getResultList();
 		} catch (Throwable e) {
 			e.printStackTrace();

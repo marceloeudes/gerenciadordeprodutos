@@ -14,23 +14,23 @@
 			<p:menubar style="margin-top: 10px;">
 
 				<p:menuitem value="Produtos" icon="fa fa-fw fa-cube"
-					action="manterproduto?faces-redirect=true" />
+					action="#{menuPrincipalBean.navegarProdutos}" />
 
 				<p:menuitem value="Clientes" icon="fa fa-fw fa-user" />
 
 				<p:menuitem value="Compras" icon="fa fa-fw fa-shopping-cart" />
 
 				<p:menuitem value="Usuários"
-					action="usuariologado?faces-redirect=true" icon="fa fa-fw fa-user" />
+					action="#{menuPrincipalBean.navegarUsuarios}" icon="fa fa-fw fa-user" />
 
 				<f:facet name="options">
 
 					<div style="margin-top: 5px;">
 
-						<p:outputLabel value="#{sessaoBean.usuario.nome}"
+						<p:outputLabel value="#{menuPrincipalBean.usuario.nome}"
 							styleClass="usuario-logado" />
 
-						<p:commandButton value="Logout" action="#{sessaoBean.deslogar}"
+						<p:commandButton value="Logout" action="#{menuPrincipalBean.deslogar}"
 							icon="fa fa-fw fa-sign-out" />
 
 					</div>

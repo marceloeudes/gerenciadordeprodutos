@@ -9,6 +9,7 @@ public final class Paginas {
 	public final static String NOVO_PRODUTO = "novoproduto" + REDIRECT_TRUE;
 	public final static String MANTER_PRODUTO = "manterproduto" + REDIRECT_TRUE;
 	public final static String ALTERAR_PRODUTO = "alterarproduto" + REDIRECT_TRUE;
+	public final static String DETALHAR_PRODUTO = "detalharproduto" + REDIRECT_TRUE;
 	public final static String MANTER_CATEGORIA = "mantercategoria" + REDIRECT_TRUE;
 	public final static String NOVA_CATEGORIA = "novacategoria" + REDIRECT_TRUE;
 	public final static String ALTERAR_CATEGORIA = "alterarcategoria" + REDIRECT_TRUE;

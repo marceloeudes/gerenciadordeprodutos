@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/produtos.xhtml">
+	<ui:define name="subconteudo">
+
+		<p:growl id="message" showDetail="true" life="5000">
+			<p:autoUpdate disabled="true"></p:autoUpdate>
+		</p:growl>
+
+		<p:panel class="ui-g-12" style="margin-top: 10px;">
+			<p:outputLabel value="Manter Produto" />
+		</p:panel>
+
+		<h:form>
+
+			<p:panel header="Detalhar Produto" styleClass="ui-g-12"
+				style="margin-top: 10px;">
+
+				<h:panelGrid columns="2" styleClass="painelgrid-cadastro">
+
+					<p:outputLabel value="Descrição:" />
+
+					<p:outputLabel id="descricao"
+						value="#{detalharProdutoBean.produto.descricao}" />
+
+					<p:outputLabel value="Categoria:" />
+
+					<p:outputLabel id="categoria"
+						value="#{detalharProdutoBean.produto.categoria.nome}" />
+
+					<p:outputLabel value="Preço:" />
+
+					<p:outputLabel id="preco"
+						value="R$ #{detalharProdutoBean.produto.valor}" />
+
+					<p:outputLabel value="Quantidade:" />
+
+					<p:outputLabel id="estoque"
+						value="#{detalharProdutoBean.produto.estoque}" />
+
+				</h:panelGrid>
+
+				<hr />
+
+				<div align="left" style="display: inline-block;">
+
+					<p:outputLabel value="Dados de Inclusão" />
+
+					<h:panelGrid columns="2" styleClass="painelgrid-cadastro"
+						style="margin-top: 10px;">
+
+						<p:outputLabel value="Usuário:" />
+
+						<p:outputLabel id="usuarioInclusao"
+							value="#{detalharProdutoBean.produto.usuarioInclusao.nome}" />
+
+						<p:outputLabel value="Data:" />
+
+						<p:outputLabel id="usuarioManutencao"
+							value="#{detalharProdutoBean.produto.dataHoraInclusao.time}">
+							<f:convertDateTime type="both" dateStyle="short" timeZone="GMT-3" />
+						</p:outputLabel>
+
+					</h:panelGrid>
+
+				</div>
+				
+				<div align="left" style="display: inline-block;margin-left: 380px;">
+				
+					<p:outputLabel value="Dados de Manutenção"
+						rendered="#{detalharProdutoBean.manutencao}" />
+
+					<h:panelGrid columns="2" styleClass="painelgrid-cadastro"
+						style="margin-top: 10px;"
+						rendered="#{detalharProdutoBean.manutencao}">
+
+						<p:outputLabel value="Usuário:" />
+
+						<p:outputLabel
+							value="#{detalharProdutoBean.produto.usuarioManutencao.nome}" />
+
+						<p:outputLabel value="Data:" />
+
+						<p:outputLabel
+							value="#{detalharProdutoBean.produto.dataHoraManutencao.time}">
+							<f:convertDateTime type="both" dateStyle="short" timeZone="GMT-3" />
+						</p:outputLabel>
+
+					</h:panelGrid>
+
+				</div>
+
+				<hr />
+
+				<div align="left" class="ui-g-6">
+
+					<p:commandButton value="voltar"
+						action="#{detalharProdutoBean.voltar}" ajax="false"
+						immediate="true" icon="fa fa-fw fa-arrow-left" />
+				</div>
+
+				<div align="right" class="ui-g-6"></div>
+
+			</p:panel>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>
