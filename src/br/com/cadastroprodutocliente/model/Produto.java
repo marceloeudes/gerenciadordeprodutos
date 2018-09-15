@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import br.com.cadastroprodutocliente.util.SiteUtil;
+
 @Entity(name = "TB_PRODUTO")
 public class Produto {
 
@@ -28,8 +30,17 @@ public class Produto {
 	@JoinColumn(name = "CD_CATEGORIA_PRODUTO")
 	private Categoria categoria;
 	
-	@Column(name = "VL_PRODUTO")
-	private BigDecimal valor;
+	@Column(name = "VL_CUSTO_PRODUTO")
+	private BigDecimal valorCusto;
+	
+	@Column(name = "NR_BASE_PRECO_VENDA")
+	private Integer baseValorVenda;
+	
+	@Column(name = "VL_PERCENTUAL_VENDA")
+	private Double percentualVenda;
+	
+	@Column(name = "VL_VENDA_PRODUTO")
+	private BigDecimal valorVenda;
 	
 	@Column(name = "NR_QTD_ESTOQUE")
 	private int estoque;
@@ -66,12 +77,42 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
-	public BigDecimal getValor() {
-		return valor;
+	public BigDecimal getValorCusto() {
+		return valorCusto;
 	}
 
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
+	public void setValorCusto(BigDecimal valorCusto) {
+		this.valorCusto = valorCusto;
+	}
+
+	public Integer getBaseValorVenda() {
+		if (SiteUtil.emptyOrNull(baseValorVenda)) {
+			return 0;
+		}
+		return baseValorVenda;
+	}
+
+	public void setBaseValorVenda(Integer baseValorVenda) {
+		this.baseValorVenda = baseValorVenda;
+	}
+
+	public Double getPercentualVenda() {
+		if (SiteUtil.emptyOrNull(percentualVenda)) {
+			return 0.0d;
+		}
+		return percentualVenda;
+	}
+
+	public void setPercentualVenda(Double percentualVenda) {
+		this.percentualVenda = percentualVenda;
+	}
+
+	public BigDecimal getValorVenda() {
+		return valorVenda;
+	}
+
+	public void setValorVenda(BigDecimal valorVenda) {
+		this.valorVenda = valorVenda;
 	}
 
 	public int getEstoque() {

@@ -15,10 +15,11 @@ public enum Mensagens {
 	SENHA_RESETADA_COM_SUCESSO(FacesMessage.SEVERITY_INFO , "Info!", "Senha Resetada com Sucesso!"),
 	SENHA_ALTERADA_COM_SUCESSO(FacesMessage.SEVERITY_INFO , "Info!", "Senha Alterada com Sucesso!"),
 	SENHA_INFORMADA_INCORRETA(FacesMessage.SEVERITY_WARN , "Warn!", "Senha informada incorreta!"),
-	PRECO_PRODUTO_INVALIDO(FacesMessage.SEVERITY_WARN , "Warn!", "Preço do Produto deve ser maior que zero"),
+	PRECO_PRODUTO_INVALIDO(FacesMessage.SEVERITY_WARN , "Warn!", "Preço de Venda do Produto deve ser maior que zero"),
 	QUANTIDADE_PRODUTO_INVALIDO(FacesMessage.SEVERITY_WARN , "Warn!", "Quantidade do Produto deve ser maior que zero"),
 	CATEGORIA_PRODUTO_OBRIGATORIO(FacesMessage.SEVERITY_WARN , "Warn!", "Categoria do Produto obrigatório"),
-	DESCRICAO_PRODUTO_OBRIGATORIO(FacesMessage.SEVERITY_WARN , "Warn!", "Descrição do Produto obrigatório");
+	DESCRICAO_PRODUTO_OBRIGATORIO(FacesMessage.SEVERITY_WARN , "Warn!", "Descrição do Produto obrigatório"),
+	PERCENTUAL_VENDA_OBRIGATORIO(FacesMessage.SEVERITY_WARN , "Warn!", "Percentual de Venda obrigatório");
 	
 	private FacesMessage.Severity severity;
 	private String summary;

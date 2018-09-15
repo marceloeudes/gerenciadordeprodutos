@@ -23,4 +23,14 @@ public final class SiteUtil {
 		}
 		return false;
 	}
+	
+	public static boolean doubleZeroOrNull(Double valorDouble) {
+		if (valorDouble == null) {
+			return true;
+		}
+		if (valorDouble == 0.0d) {
+			return true;
+		}
+		return false;
+	}
 }

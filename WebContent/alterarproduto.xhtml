@@ -46,14 +46,66 @@
 
 					</h:panelGrid>
 
-					<p:outputLabel value="Preço:" />
+					<p:outputLabel value="Preço de Custo:" />
 
 					<h:panelGrid>
 
-						<p:inputNumber id="preco" converter="javax.faces.BigDecimal"
-							placeholder="Preço" title="Preço" emptyValue="zero" tabindex="1"
-							value="#{alterarProdutoBean.produto.valor}" symbol="R$ "
-							decimalSeparator="," thousandSeparator="." />
+						<p:inputNumber id="precoCusto" converter="javax.faces.BigDecimal"
+							placeholder="Preço de Custo" title="Preço de Custo"
+							emptyValue="zero" tabindex="1"
+							value="#{alterarProdutoBean.inputValorPrecoCusto}"
+							valueChangeListener="#{alterarProdutoBean.atualizarPrecoVendaCusto}"
+							symbol="R$ " decimalSeparator="," thousandSeparator=".">
+
+							<p:ajax update="precoVenda" />
+
+						</p:inputNumber>
+
+					</h:panelGrid>
+
+					<p:outputLabel value="Base do Preço de Venda:" />
+
+					<h:panelGrid>
+
+						<p:selectOneRadio id="base"
+							value="#{alterarProdutoBean.produtoAlteracao.baseValorVenda}"
+							valueChangeListener="#{alterarProdutoBean.atualizarBaseVenda}"
+							onchange="submit()" layout="grid" columns="4">
+							<f:selectItem itemLabel="Percentual" itemValue="1" />
+							<f:selectItem itemLabel="Livre" itemValue="2" />
+
+						</p:selectOneRadio>
+
+					</h:panelGrid>
+
+					<p:outputLabel value="Percentual:"
+						rendered="#{alterarProdutoBean.renderizaPercentual}" />
+
+					<h:panelGrid id="percentual"
+						rendered="#{alterarProdutoBean.renderizaPercentual}">
+
+						<p:inputNumber converter="javax.faces.Double"
+							value="#{alterarProdutoBean.produtoAlteracao.percentualVenda}"
+							placeholder="Percentual de Venda" title="Percentual de Venda"
+							symbol="%" symbolPosition="s"
+							valueChangeListener="#{alterarProdutoBean.atualizarPrecoVendaPercentual}">
+
+							<p:ajax update="precoVenda" />
+
+						</p:inputNumber>
+
+					</h:panelGrid>
+
+					<p:outputLabel value="Preço de Venda:" />
+
+					<h:panelGrid>
+
+						<p:inputNumber id="precoVenda" converter="javax.faces.BigDecimal"
+							placeholder="Preço de Venda" title="Preço de Venda"
+							emptyValue="zero" tabindex="1"
+							value="#{alterarProdutoBean.produtoAlteracao.valorVenda}" symbol="R$ "
+							decimalSeparator="," thousandSeparator="."
+							disabled="#{alterarProdutoBean.desabilitarPrecoVenda}" />
 
 					</h:panelGrid>
 

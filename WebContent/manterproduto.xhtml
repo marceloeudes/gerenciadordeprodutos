@@ -72,9 +72,19 @@
 						<h:outputText value="#{p.estoque}" />
 					</p:column>
 
-					<p:column headerText="Valor" style="text-align: center;"
+					<p:column headerText="Preço de Custo" style="text-align: center;"
+						sortBy="#{p.valorCusto}">
+						<h:outputText value="#{p.valorCusto}">
+
+							<f:convertNumber type="currency" pattern="R$ #,##0.00"
+								currencyCode="BRL" />
+
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Preço de Venda" style="text-align: center;"
 						sortBy="#{p.valor}">
-						<h:outputText value="#{p.valor}">
+						<h:outputText value="#{p.valorVenda}">
 
 							<f:convertNumber type="currency" pattern="R$ #,##0.00"
 								currencyCode="BRL" />
@@ -83,7 +93,7 @@
 					</p:column>
 
 				</p:dataTable>
-				
+
 				<hr />
 
 				<div align="right" class="div-button-right">

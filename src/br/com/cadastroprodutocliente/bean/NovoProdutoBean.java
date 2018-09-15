@@ -35,7 +35,7 @@ public class NovoProdutoBean {
 		if (SiteUtil.emptyOrNull(produto)) {
 			produto = new Produto();
 			produto.setCategoria(new Categoria());
-			produto.setValor(BigDecimal.ZERO);
+			produto.setValorVenda(BigDecimal.ZERO);
 		}
 	}
 
@@ -55,7 +55,7 @@ public class NovoProdutoBean {
 				FacesMessageUtil.addMenssage(Mensagens.CADASTRADO_COM_SUCESSO);
 				produto = new Produto();
 				produto.setCategoria(new Categoria());
-				produto.setValor(BigDecimal.ZERO);
+				produto.setValorVenda(BigDecimal.ZERO);
 			} else {
 				FacesMessageUtil.addMenssage(Mensagens.ERRO_ACESSO_BASE_DADOS);
 			}
@@ -73,7 +73,7 @@ public class NovoProdutoBean {
 			FacesMessageUtil.addMenssage(Mensagens.CATEGORIA_PRODUTO_OBRIGATORIO);
 			valido = false;
 		}
-		if (SiteUtil.bigDecimalZeroOrNull(produto.getValor())) {
+		if (SiteUtil.bigDecimalZeroOrNull(produto.getValorVenda())) {
 			FacesMessageUtil.addMenssage(Mensagens.PRECO_PRODUTO_INVALIDO);
 			valido = false;
 		}
